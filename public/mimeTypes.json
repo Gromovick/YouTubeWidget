@@ -1,0 +1,13 @@
+{
+  "File Extension(s)": "MIME Type",
+  "jpeg": "image/jpeg",
+  "jpg": "image/jpeg",
+  "png": "image/png",
+  "gif": "image/gif",
+  "webp": "image/webp",
+  "svg": "image/svg+xml",
+  "avif": "image/avif",
+  "bmp": "image/bmp",
+  "ico": "image/vnd.microsoft.icon",
+  "tiff": "image/tiff"
+}

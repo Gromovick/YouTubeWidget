@@ -1,0 +1,28 @@
+{
+  "name": "youtube_widget",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "test": "nodemon index.ts",
+    "mime": "node other/mimeTypesConfigure.js"
+  },
+  "author": "Seva",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.11.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "http-status-codes": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.1.0",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
