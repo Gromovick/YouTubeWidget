@@ -1,18 +1,18 @@
 import { Request, Response, NextFunction } from "express";
 import { ApiError } from "../utils/ErrorApi";
-import { AxiosError } from "axios";
 import { defaults } from "../utils/base64Defaults";
 
 export async function errorHandler(
-  err: unknown,
+  err: any,
   req: Request,
   res: Response,
   next: NextFunction
 ) {
+  console.error("Error caught status:", err?.status);
   console.error("Error caught:", err);
 
   if (err instanceof ApiError) {
-    if (err.status === 404) {
+    if (err.status === 404 || err.isOperational) {
       const { bannerDefault, youtubeSvg, error404 } = await defaults();
       res.set("Cache-Control", "s-maxage=1, stale-while-revalidate");
       res.set("Content-Type", "image/svg+xml");
@@ -276,7 +276,7 @@ export async function errorHandler(
       </foreignObject> 
       </svg>`);
     }
-    return res.status(err.status).json(err);
+    return res.status(err.status || 505).json(err);
   }
 
   // Default handler

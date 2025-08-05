@@ -25,7 +25,7 @@ export class ApiError extends Error implements ApiErrorType {
     super(message);
     this.otherMessage = JSON.stringify(message);
     this.name = "ApiError";
-    this.status = status;
+    this.status = status || 500;
     this.isOperational = isOperational;
     this.myMessage = myMessage;
     this.error = error;
@@ -41,7 +41,7 @@ export class ApiError extends Error implements ApiErrorType {
     if (error instanceof AxiosError) {
       const axiosError = error.response as any;
       return new ApiError(
-        axiosError.status,
+        axiosError?.status,
         false,
         axiosError.data ?? defaultMessage,
         (error as any)?.myMessage ?? defaultMessage
