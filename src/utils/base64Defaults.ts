@@ -31,7 +31,7 @@ async function imageFileToBase64Url(
   const fileType = file.split(".")[1];
   const base64Data = Base64Converter.fromFileSync(filePath);
   const types = await fs.promises.readFile(
-    path.join(__dirname, "..", "..", "dist", "public", "mimeTypes.json"),
+    path.resolve(__dirname, "..", "..", "public", "mimeTypes.json"),
     "utf-8"
   );
   const typesObject = JSON.parse(types);
