@@ -38,7 +38,7 @@ function imageFileToBase64Url() {
         const filePath = path_1.default.join(__dirname, ...dirPath.split("/"), file);
         const fileType = file.split(".")[1];
         const base64Data = Base64Converter_1.Base64Converter.fromFileSync(filePath);
-        const types = yield fs_1.default.promises.readFile("public/mimeTypes.json", "utf-8");
+        const types = yield fs_1.default.promises.readFile(path_1.default.join(__dirname, "..", "..", "dist", "public", "mimeTypes.json"), "utf-8");
         const typesObject = JSON.parse(types);
         return `data:${typesObject[fileType]};base64, ${base64Data}`;
     });
