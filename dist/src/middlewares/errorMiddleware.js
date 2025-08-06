@@ -14,9 +14,10 @@ const ErrorApi_1 = require("../utils/ErrorApi");
 const base64Defaults_1 = require("../utils/base64Defaults");
 function errorHandler(err, req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
+        console.error("Error caught status:", err === null || err === void 0 ? void 0 : err.status);
         console.error("Error caught:", err);
         if (err instanceof ErrorApi_1.ApiError) {
-            if (err.status === 404) {
+            if (err.status === 404 || err.isOperational) {
                 const { bannerDefault, youtubeSvg, error404 } = yield (0, base64Defaults_1.defaults)();
                 res.set("Cache-Control", "s-maxage=1, stale-while-revalidate");
                 res.set("Content-Type", "image/svg+xml");
@@ -280,7 +281,7 @@ function errorHandler(err, req, res, next) {
       </foreignObject> 
       </svg>`);
             }
-            return res.status(err.status).json(err);
+            return res.status(err.status || 505).json(err);
         }
         // Default handler
         return res.status(500).json({

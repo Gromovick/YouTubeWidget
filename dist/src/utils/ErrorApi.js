@@ -7,7 +7,7 @@ class ApiError extends Error {
         super(message);
         this.otherMessage = JSON.stringify(message);
         this.name = "ApiError";
-        this.status = status;
+        this.status = status || 500;
         this.isOperational = isOperational;
         this.myMessage = myMessage;
         this.error = error;
@@ -21,7 +21,7 @@ class ApiError extends Error {
             return error;
         if (error instanceof axios_1.AxiosError) {
             const axiosError = error.response;
-            return new ApiError(axiosError.status, false, (_a = axiosError.data) !== null && _a !== void 0 ? _a : defaultMessage, (_b = error === null || error === void 0 ? void 0 : error.myMessage) !== null && _b !== void 0 ? _b : defaultMessage);
+            return new ApiError(axiosError === null || axiosError === void 0 ? void 0 : axiosError.status, false, (_a = axiosError.data) !== null && _a !== void 0 ? _a : defaultMessage, (_b = error === null || error === void 0 ? void 0 : error.myMessage) !== null && _b !== void 0 ? _b : defaultMessage);
         }
         return new ApiError(500, false, (_c = error === null || error === void 0 ? void 0 : error.message) !== null && _c !== void 0 ? _c : defaultMessage, (_d = error === null || error === void 0 ? void 0 : error.myMessage) !== null && _d !== void 0 ? _d : defaultMessage);
     }
